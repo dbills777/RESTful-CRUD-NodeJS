@@ -6,7 +6,9 @@ import {
   postAddCharacter,
   getAllCharcters,
   getCharactersByID,
-  putUpdateOneCharacter,
+  updateName,
+  updateNickName,
+  seachCharacters,
   deleteCharactersByID,
 } from '../controllers/character.controller.js';
 
@@ -17,7 +19,9 @@ characterRouter.post('/', postAddCharacter);
 // Get products single and all
 characterRouter.get('/', getAllCharcters);
 characterRouter.get('/getone', getCharactersByID);
+characterRouter.get('/search', seachCharacters);
 // Update Products
-characterRouter.put('/updateone', putUpdateOneCharacter);
+characterRouter.put('/update-name', updateName);
+characterRouter.put('/update-nick-name', updateNickName);
 // Delete one product
 characterRouter.delete('/', deleteCharactersByID);

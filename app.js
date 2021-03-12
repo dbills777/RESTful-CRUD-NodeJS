@@ -7,23 +7,18 @@ import bodyparser from 'body-parser';
 import * as dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
 
-import path from 'path';
 mongoose.set('useFindAndModify', false);
 dotenv.config();
-
-// path imports and constants for serving public files
-import { fileURLToPath } from 'url';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 // app & port
 const port = process.env.PORT || 5000;
 const app = express();
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cors());
 //tell apiRouter to serve public folder
-app.use(express.static('public'));
 
 //tell app to use routes
 app.use('/api', (req, res, next) => {
@@ -36,14 +31,6 @@ app.use('/api', apiRouter);
 app.use('/product', productRouter);
 app.use('/character', characterRouter);
 app.use('/store', storeRouter);
-
-// Form
-app.get('/form', (req, res) => {
-  res.sendFile('./public/productForm.html', { root: __dirname });
-});
-app.use((req, res, next) => {
-  res.sendFile('./public/404.html', { root: __dirname });
-});
 
 //listen on assigned env port or default port
 const main = async () => {

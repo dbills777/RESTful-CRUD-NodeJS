@@ -1,7 +1,8 @@
+import { response } from 'express';
 import { Character } from '../models/characters.js';
 
 export const postAddCharacter = (req, res) => {
-  console.log("***************************", req);
+  console.log('***************************', req);
   const character = new Character({
     char_id: req.body.char_id,
     name: req.body.name,
@@ -16,13 +17,35 @@ export const postAddCharacter = (req, res) => {
   });
   console.log(character);
   character.save();
-    res.json(character);
+  res.json(character);
 };
 // Example of other method for making requests
 
 export const getAllCharcters = async (req, res) => {
-  const products = await Character.find();
-  res.send(products);
+  const chars = await Character.find();
+  res.send(chars);
+};
+
+export const seachCharacters = async (req, res) => {
+  try {
+    let result = await Character.aggregate([
+      {
+        $search: {
+          autocomplete: {
+            query: `${req.query.term}`,
+            path: 'name',
+            fuzzy: {
+              maxEdits: 2,
+            },
+          },
+        },
+      },
+    ])
+
+    res.send(result);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
 };
 
 export const getCharactersByID = async (req, res) => {
@@ -36,23 +59,36 @@ export const getCharactersByID = async (req, res) => {
     res.status(400).json({ Message: `Can't find Product ${err}` });
   }
 };
-export const putUpdateOneCharacter = async (req, res) => {
-  const productID = req.body.productID;
+export const updateName = async (req, res) => {
+  const characterID = req.body.characterID;
   const newItemInfo = {
     name: req.body.name,
-    // price: req.body.price,
-    // description: req.body.description,
-    // imgURL: req.body.imgURL,
   };
   try {
     try {
-      const product = await Character.findByIdAndUpdate(productID, newItemInfo, { new: true });
-      res.json(product);
+      const char = await Character.findByIdAndUpdate(characterID, newItemInfo, { new: true });
+      res.json(char);
     } catch (err) {
       res.status(400).json({ Message: `Could not update: ${err}` });
     }
   } catch (error) {
-    res.status(400).json({ Message: `Invalid Product ${err}` });
+    res.status(400).json({ Message: `Invalid char ${err}` });
+  }
+};
+export const updateNickName = async (req, res) => {
+  const characterID = req.body.characterID;
+  const newItemInfo = {
+    nickname: req.body.nickname,
+  };
+  try {
+    try {
+      const char = await Character.findByIdAndUpdate(characterID, newItemInfo, { new: true });
+      res.json(char);
+    } catch (err) {
+      res.status(400).json({ Message: `Could not update: ${err}` });
+    }
+  } catch (error) {
+    res.status(400).json({ Message: `Invalid char ${err}` });
   }
 };
 
