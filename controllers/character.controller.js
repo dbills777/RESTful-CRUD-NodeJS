@@ -4,16 +4,16 @@ import { Character } from '../models/characters.js';
 export const postAddCharacter = (req, res) => {
   console.log('***************************', req);
   const character = new Character({
-    char_id: req.body.char_id,
     name: req.body.name,
-    birhtday: req.body.birhtday,
     occupation: req.body.occupation,
-    img: req.body.img,
+    image: req.body.image,
     status: req.body.status,
     nickname: req.body.nickname,
-    appearance: req.body.appearance,
     portrayed: req.body.portrayed,
-    category: req.body.category,
+    char_id: req.body.char_id,
+    // birhtday: req.body.birhtday,
+    // appearance: req.body.appearance,
+    // category: req.body.category,
   });
   console.log(character);
   character.save();
