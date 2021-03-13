@@ -1,7 +1,5 @@
 //imports
 import { apiRouter } from './routes/api.route.js';
-import { productRouter } from './routes/product.route.js';
-import { storeRouter } from './routes/store.route.js';
 import { episodeRouter } from './routes/episode.route.js';
 import { characterRouter } from './routes/character.route.js';
 import bodyparser from 'body-parser';
@@ -29,10 +27,8 @@ app.use('/api', (req, res, next) => {
   next();
 });
 app.use('/api', apiRouter);
-// app.use('/product', productRouter); Used for testing mongoDB pushing
 app.use('/character', characterRouter);
-// app.use('/store', storeRouter); used to push items to mongoDB
-app.use('/episode', episodeRouter); 
+app.use('/episode', episodeRouter);
 
 //listen on assigned env port or default port
 const main = async () => {

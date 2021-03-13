@@ -2,7 +2,7 @@
 import { Router } from 'express';
 
 // use api.conroller for exporting functions
-import { api, status } from '../controllers/api.controller.js';
+import { api } from '../controllers/api.controller.js';
 
 //export appRouter instance
 export const apiRouter = Router();
