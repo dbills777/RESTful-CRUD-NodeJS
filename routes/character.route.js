@@ -12,13 +12,13 @@ import {
 
 //export appRouter instances
 export const characterRouter = Router();
-// Post Product
+// Post character
 characterRouter.post('/', postAddCharacter);
-// Get products single and all
+// Get characters search and all
 characterRouter.get('/', getAllCharcters);
 characterRouter.get('/search', seachCharacters);
-// Update Products
+// Delete one character
+characterRouter.delete('/', deleteCharactersByID);
+// Update characters
 characterRouter.put('/update-name', updateName);
 characterRouter.put('/update-nick-name', updateNickName);
-// Delete one product
-characterRouter.delete('/', deleteCharactersByID);
