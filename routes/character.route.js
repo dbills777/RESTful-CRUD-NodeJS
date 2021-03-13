@@ -1,11 +1,9 @@
 //imports
 import { Router } from 'express';
 
-// use product.conroller for exporting functions
 import {
   postAddCharacter,
   getAllCharcters,
-  getCharactersByID,
   updateName,
   updateNickName,
   seachCharacters,
@@ -18,7 +16,6 @@ export const characterRouter = Router();
 characterRouter.post('/', postAddCharacter);
 // Get products single and all
 characterRouter.get('/', getAllCharcters);
-characterRouter.get('/getone', getCharactersByID);
 characterRouter.get('/search', seachCharacters);
 // Update Products
 characterRouter.put('/update-name', updateName);

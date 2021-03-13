@@ -8,6 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js",
     "seed": "node seed/loadStore.js",
+    "seedep": "node seed/loadEpisode.js",
     "seedchar": "node seed/loadDB.js"
   },
   "author": "Derrick Bills",

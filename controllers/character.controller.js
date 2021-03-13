@@ -1,8 +1,6 @@
-import { response } from 'express';
 import { Character } from '../models/characters.js';
 
 export const postAddCharacter = (req, res) => {
-  console.log('***************************', req);
   const character = new Character({
     name: req.body.name,
     occupation: req.body.occupation,
@@ -11,15 +9,10 @@ export const postAddCharacter = (req, res) => {
     nickname: req.body.nickname,
     portrayed: req.body.portrayed,
     char_id: req.body.char_id,
-    // birhtday: req.body.birhtday,
-    // appearance: req.body.appearance,
-    // category: req.body.category,
   });
-  console.log(character);
   character.save();
   res.json(character);
 };
-// Example of other method for making requests
 
 export const getAllCharcters = async (req, res) => {
   const chars = await Character.find();
@@ -40,25 +33,13 @@ export const seachCharacters = async (req, res) => {
           },
         },
       },
-    ])
-
+    ]);
     res.send(result);
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
 };
 
-export const getCharactersByID = async (req, res) => {
-  const productID = req.body.productID;
-  try {
-    const product = await Product.findById(productID);
-    if (!product) return res.status(400).json({ Message: 'Item with that productID is not found' });
-    // console.log(`Product id: ${productID}`);
-    res.json(product);
-  } catch (error) {
-    res.status(400).json({ Message: `Can't find Product ${err}` });
-  }
-};
 export const updateName = async (req, res) => {
   const characterID = req.body.characterID;
   const newItemInfo = {

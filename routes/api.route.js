@@ -9,5 +9,4 @@ export const apiRouter = Router();
 
 // "/api" Route  that returns a JSON object
 apiRouter.get('/', api);
-apiRouter.get('/status', status);
 //this is a test
